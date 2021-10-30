@@ -56,7 +56,7 @@ class Blockchain(object):
     @property
     def last_block(self):
         # returns the last block in the chain
-        return self.chian[-1]
+        return self.chain[-1]
 
     def proof_of_work(self,last_proof):
         
