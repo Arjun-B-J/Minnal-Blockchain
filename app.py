@@ -20,7 +20,7 @@ def mine():
     proof = blockchain.proof_of_work(last_proof)
     # We must receive a reward for finding the proof.
     # The sender is "0" to signify that this node has mined a new coin
-    blockchain.new_transcation(
+    blockchain.new_transaction(
         sender="0",
         recipient=node_identifier,
         amount=1
@@ -32,26 +32,26 @@ def mine():
     response = {
         'message': "New Block Forged",
         'index': block['index'],
-        'transactions': block['transcation'],
+        'transactions': block['transactions'],
         'proof': block['proof'],
         'previous_hash': block['previous_hash']
     }
     return jsonify(response),200
 
-@app.route('/transcations/new',methods =['POST'])
+@app.route('/transactions/new', methods=['POST'])
 def new_transaction():
     values = request.get_json()
 
-    #check wheather all required fields are in the POST'ed data
-    required = ['sender','recipient','amount']
+    # Check that the required fields are in the POST'ed data
+    required = ['sender', 'recipient', 'amount']
     if not all(k in values for k in required):
-        return 'Missing values',400
-    
-    #create a new transaction
-    index = blockchain.new_transcation(values['sender'],values['recipient'],values['amount'])
-    response = {'message'f'Transcation will be added to the Block {index}'}
+        return 'Missing values', 400
 
-    return jsonify(response),201
+    # Create a new Transaction
+    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+
+    response = {'message': f'Transaction will be added to Block {index}'}
+    return jsonify(response), 201
 
 @app.route('/chain',methods=['GET'])
 def full_chain():
