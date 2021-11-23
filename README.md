@@ -1,2 +1,2 @@
 # Minnal-Blockchain
-need to implement a Consensus Algorithm
+A Basic Blockchain Implementation 
